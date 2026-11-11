@@ -74,7 +74,7 @@ pub struct Vertex<T> {
     pub meta: Option<T>,
 }
 
-pub struct Edge(usize, usize);
+pub struct Edge(pub usize, pub usize);
 
 pub struct Graph<T> {
     pub edges: Vec<Edge>,
