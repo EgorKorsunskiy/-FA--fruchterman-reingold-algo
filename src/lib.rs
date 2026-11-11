@@ -69,16 +69,16 @@ impl Mul<f32> for Vec2 {
 }
 
 pub struct Vertex<T> {
-    pos: Vec2,
-    disp: Vec2,
-    meta: Option<T>,
+    pub pos: Vec2,
+    pub disp: Vec2,
+    pub meta: Option<T>,
 }
 
 pub struct Edge(usize, usize);
 
 pub struct Graph<T> {
-    edges: Vec<Edge>,
-    vertices: Vec<Vertex<T>>,
+    pub edges: Vec<Edge>,
+    pub vertices: Vec<Vertex<T>>,
 }
 
 pub fn fruchterman_reingold<T>(width: f32, height: f32, mut graph: Graph<T>) -> Graph<T> {
