@@ -1,13 +1,13 @@
 use std::ops::{Add, Div, Mul, Sub};
 
 #[derive(Copy, Clone)]
-struct Vec2 {
+pub struct Vec2 {
     x: f32,
     y: f32,
 }
 
 impl Vec2 {
-    fn new() -> Self {
+    pub fn new() -> Self {
         Vec2 { x: 0., y: 0. }
     }
 }
