@@ -136,5 +136,11 @@ pub fn fruchterman_reingold<T>(width: f32, height: f32, mut graph: Graph<T>) -> 
         temperature -= cooling_factor;
     }
 
+    for v in &mut graph.vertices {
+        // rescale from (-pos/2, pos/2) to (0, pos)
+        v.pos.x += width / 2.;
+        v.pos.y += height / 2.;
+    }
+
     graph
 }
