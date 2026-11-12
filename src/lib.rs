@@ -129,6 +129,8 @@ pub fn fruchterman_reingold<T>(width: f32, height: f32, mut graph: Graph<T>) -> 
         // update pos subject to temperature constraints
         for v in &mut graph.vertices {
             v.pos = v.pos + (v.disp / v.disp.norm()) * v.disp.norm().min(temperature);
+            v.pos.x = (width / 2.).min((-width / 2.).max(v.pos.x));
+            v.pos.y = (height / 2.).min((-height / 2.).max(v.pos.y));
         }
 
         temperature -= cooling_factor;
