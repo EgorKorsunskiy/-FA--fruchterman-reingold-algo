@@ -112,6 +112,10 @@ pub fn fruchterman_reingold<T>(width: f32, height: f32, mut graph: Graph<T>) -> 
 
         // attractive forces
         for Edge(a, b) in &graph.edges {
+            if a == b {
+                // prevent self-loops from introducing NaN
+                continue;
+            }
             let v = &graph.vertices[*a];
             let u = &graph.vertices[*b];
             let diff = v.pos - u.pos;
