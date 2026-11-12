@@ -105,6 +105,9 @@ pub fn fruchterman_reingold<T>(width: f32, height: f32, mut graph: Graph<T>) -> 
                     continue;
                 }
                 let diff = u.pos - v_pos;
+                if diff.norm() < 1e-3 {
+                    continue;
+                }
                 disp = disp + (diff / diff.norm()) * repul_force(diff.norm());
             }
             graph.vertices[i].disp = disp;
@@ -119,7 +122,9 @@ pub fn fruchterman_reingold<T>(width: f32, height: f32, mut graph: Graph<T>) -> 
             let v = &graph.vertices[*a];
             let u = &graph.vertices[*b];
             let diff = v.pos - u.pos;
-
+            if diff.norm() < 1e-3 {
+                continue;
+            }
             let v = &mut graph.vertices[*a];
             v.disp = v.disp - (diff / diff.norm()) * attr_force(diff.norm());
             let u = &mut graph.vertices[*b];
@@ -128,6 +133,9 @@ pub fn fruchterman_reingold<T>(width: f32, height: f32, mut graph: Graph<T>) -> 
 
         // update pos subject to temperature constraints
         for v in &mut graph.vertices {
+            if v.disp.norm() < 1e-3 {
+                continue;
+            }
             v.pos = v.pos + (v.disp / v.disp.norm()) * v.disp.norm().min(temperature);
             v.pos.x = (width / 2.).min((-width / 2.).max(v.pos.x));
             v.pos.y = (height / 2.).min((-height / 2.).max(v.pos.y));
